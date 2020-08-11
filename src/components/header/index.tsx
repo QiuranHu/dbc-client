@@ -22,17 +22,22 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
     },
-
   }),
 );
 
-function Header() {
+function Header(props:any) {
     const classes = useStyles();
-
     return (
+      <>
         <AppBar position="static" className={classes.root}>
           <Toolbar>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <IconButton 
+              edge="start" 
+              className={classes.menuButton} 
+              color="inherit" 
+              aria-label="menu"
+              onClick={props.changeDrawer}
+            >
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
@@ -41,7 +46,7 @@ function Header() {
             <Button color="inherit">Login</Button>
           </Toolbar>
         </AppBar>
-
+      </>
     );
 }
 
