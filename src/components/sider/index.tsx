@@ -10,6 +10,8 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Divider from '@material-ui/core/Divider';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import { withRouter } from "react-router";
+
 export const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,40 +31,46 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function Sider(props: any) {
-    const classes = useStyles();
-    const drawerOpen = props.drawerOpen;
-    const changeDrawer = props.changeDrawer;
-    let isSmallScreen = true;
-    if (isWidthUp('md', props.width)) {
-        isSmallScreen = false;
+  const classes = useStyles();
+  const drawerOpen = props.drawerOpen;
+  const changeDrawer = props.changeDrawer;
+  let isSmallScreen = true;
+  if (isWidthUp('md', props.width)) {
+    isSmallScreen = false;
+  }
+  const goToCreate = () => {
+    props.history.push('/create');
+    if(isSmallScreen) {
+      changeDrawer();
     }
-    return (
-      <>
-        <Drawer
-          open={drawerOpen}
-          onClose={changeDrawer}
-          anchor="left"
-          variant={isSmallScreen ? 'temporary' : "persistent"}
-        >
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={changeDrawer}>
-             <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List className={classes.list}>
-            <ListItem button key={1}>
+  }
+  return (
+    <>
+      <Drawer
+        open={drawerOpen}
+        onClose={changeDrawer}
+        anchor="left"
+        variant={isSmallScreen ? 'temporary' : "persistent"}
+      >
+        <div className={classes.drawerHeader}>
+          <IconButton onClick={changeDrawer}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </div>
+        <Divider />
+        <List className={classes.list}>
+          <ListItem button key={1} onClick={goToCreate}>
             <ListItemIcon>
-                <AddBoxIcon
-                    color="primary" 
-                />
+              <AddBoxIcon
+                color="primary"
+              />
             </ListItemIcon>
             <ListItemText primary={'Create'} />
-            </ListItem>
-          </List>
-        </Drawer>
-      </>
-    );
+          </ListItem>
+        </List>
+      </Drawer>
+    </>
+  );
 }
 
-export default withWidth()(Sider);
+export default withWidth()(withRouter(Sider));

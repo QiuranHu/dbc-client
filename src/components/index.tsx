@@ -7,6 +7,8 @@ import { Main }  from './main';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { drawerWidth } from './sider';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
+import { Route } from "react-router-dom";
+import { Create } from './functions/create';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     contentShift: {
@@ -18,7 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function App(props: any) {
-
     const classes = useStyles();
     const [state, setState] = React.useState({
         drawerOpen: false,
@@ -36,14 +37,18 @@ function App(props: any) {
                 drawerOpen={state.drawerOpen}
                 changeDrawer={changeDrawer}
             >
-
             </Sider>
             <div className={state.drawerOpen ? classes.contentShift : ''}>
                 <Header
                     drawerOpen={state.drawerOpen}
                     changeDrawer={changeDrawer}
                 ></Header>
-                <Main></Main>
+                <Route path="/" exact>
+                    <Main></Main>
+                </Route>
+                <Route path='/create' exact>
+                    <Create/>
+                </Route>
             </div>
         </>
     );

@@ -77,7 +77,9 @@ export default function BusinessCard(props: any) {
                         {email}
                     </Typography>
 
-                    <Button size="small">Resume</Button>
+                    <Button size="small" href={props.resume ? props.resume : ''}>
+                        Resume
+                    </Button>
 
                     <Typography variant="body1" color="textSecondary">
                         {cardNumber}

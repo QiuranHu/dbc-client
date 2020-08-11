@@ -12,6 +12,7 @@ export class Main extends React.Component {
         phone: '',
         email: '',
         intro: '',
+        resume: ''
     }
     onCardNumberChange = (event: any) => {
         this.setState({ currentCardNumber: event.target.value });
@@ -36,7 +37,8 @@ export class Main extends React.Component {
                     name: data.name,
                     phone: data.phone,
                     email: data.email,
-                    intro: data.intro
+                    intro: data.intro,
+                    resume: data.resume
                 });
             }).catch(() => {
                 this.setState({name: ''})
@@ -64,6 +66,7 @@ export class Main extends React.Component {
                                         phone={this.state.phone}
                                         email={this.state.email}
                                         intro={this.state.intro}
+                                        resume={this.state.resume}
                                     >
                                         
                                     </BusinessCard>
