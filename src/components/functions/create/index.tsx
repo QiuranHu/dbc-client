@@ -30,22 +30,49 @@ export function Create(props: any) {
         phone: '',
         resume: '',
         cardNumber: '',
-        error: ''
+        error: new Set<string>()
     });
     let isValidated: boolean = false;
     const validateEmail = (email: string):boolean => {
-        var re = /\S+@\S+\.\S+/;
+        const re = /\S+@\S+\.\S+/;
         return re.test(email);
+    }
+    const validateCardNumber = (cardNumber: string): boolean => {
+        return /^\d*$/.test(cardNumber);
     }
     if(state.name !== '' && state.email !== '' && state.cardNumber !== '') {
         isValidated = true;
     }
-    if(!validateEmail(state.email)) {
+    if(state.email !== '' && !validateEmail(state.email)) {
         isValidated = false;
+        if(!state.error.has('email')) {
+            let newError = new Set<string>(state.error);
+            newError.add('email');
+            setState({ ...state, error: newError });
+        }
+    } else {
+        if(state.error.has('email')){
+            let newError = new Set<string>(state.error);
+            newError.delete('email');
+            setState({ ...state, error: newError });
+        }
+    }
+    if(state.cardNumber !== '' && !validateCardNumber(state.cardNumber)) {
+        isValidated = false;
+        if(!state.error.has('cardNumber')) {
+            let newError = new Set<string>(state.error);
+            newError.add('cardNumber');
+            setState({ ...state, error: newError });
+        }
+    } else {
+        if(state.error.has('cardNumber')){
+            let newError = new Set<string>(state.error);
+            newError.delete('cardNumber');
+            setState({ ...state, error: newError });
+        }
     }
     const handleInputChange = (type: string, value: string): void => {
         setState({ ...state, [type]: value });
-        // validate();
     };
     const handleFormSubmit = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
@@ -63,6 +90,7 @@ export function Create(props: any) {
 
                 <Grid item xs={12} className={classes.inputContainer}>
                     <TextField
+                        autoComplete='off'
                         id="standard-basic"
                         label="Name"
                         className={classes.input}
@@ -75,6 +103,7 @@ export function Create(props: any) {
 
                 <Grid item xs={12} className={classes.inputContainer}>
                     <TextField
+                        autoComplete='off'
                         id="standard-basic"
                         label="Intro"
                         className={classes.input}
@@ -85,6 +114,8 @@ export function Create(props: any) {
 
                 <Grid item xs={12} className={classes.inputContainer}>
                     <TextField
+                        error={state.error.has('email') ? true : false}
+                        autoComplete='off'
                         id="standard-basic"
                         label="Email"
                         className={classes.input}
@@ -96,6 +127,7 @@ export function Create(props: any) {
 
                 <Grid item xs={12} className={classes.inputContainer}>
                     <TextField
+                        autoComplete='off'
                         id="standard-basic"
                         label="Phone"
                         className={classes.input}
@@ -106,6 +138,7 @@ export function Create(props: any) {
 
                 <Grid item xs={12} className={classes.inputContainer}>
                     <TextField
+                        autoComplete='off'
                         id="standard-basic"
                         label="Link to Resume"
                         className={classes.input}
@@ -116,6 +149,8 @@ export function Create(props: any) {
 
                 <Grid item xs={12} className={classes.inputContainer}>
                     <TextField
+                        error={state.error.has('cardNumber') ? true : false}
+                        autoComplete='off'
                         id="standard-basic"
                         label="Card Number"
                         className={classes.input}
