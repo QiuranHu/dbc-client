@@ -10,6 +10,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Divider from '@material-ui/core/Divider';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import { withRouter } from "react-router";
 
 export const drawerWidth = 240;
@@ -17,7 +18,8 @@ export const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     list: {
-      width: drawerWidth
+      width: drawerWidth,
+      padding: '0'
     },
     drawerHeader: {
       display: 'flex',
@@ -43,7 +45,13 @@ function Sider(props: any) {
     if(isSmallScreen) {
       changeDrawer();
     }
-  }
+  };
+  const goToHome = (): void => {
+    props.history.push('/');
+    if(isSmallScreen) {
+      changeDrawer();
+    }
+  };
   return (
     <>
       <Drawer
@@ -58,6 +66,16 @@ function Sider(props: any) {
           </IconButton>
         </div>
         <Divider />
+        <List className={classes.list}>
+          <ListItem button key={1} onClick={goToHome}>
+            <ListItemIcon>
+              <HomeRoundedIcon
+                color="primary"
+              />
+            </ListItemIcon>
+            <ListItemText primary={'Home'} />
+          </ListItem>
+        </List>
         <List className={classes.list}>
           <ListItem button key={1} onClick={goToCreate}>
             <ListItemIcon>

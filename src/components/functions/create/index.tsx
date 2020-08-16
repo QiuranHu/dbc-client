@@ -29,11 +29,24 @@ export function Create(props: any) {
         email: '',
         phone: '',
         resume: '',
-        cardNumber: ''
+        cardNumber: '',
+        error: ''
     });
+    let isValidated: boolean = false;
+    const validateEmail = (email: string):boolean => {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+    if(state.name !== '' && state.email !== '' && state.cardNumber !== '') {
+        isValidated = true;
+    }
+    if(!validateEmail(state.email)) {
+        isValidated = false;
+    }
     const handleInputChange = (type: string, value: string): void => {
         setState({ ...state, [type]: value });
-    }
+        // validate();
+    };
     const handleFormSubmit = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
         fetch('/create', {
@@ -45,7 +58,7 @@ export function Create(props: any) {
         })
     };
     return (
-        <form className={classes.root} noValidate autoComplete="off" onSubmit={handleFormSubmit}>
+        <form className={classes.root} noValidate={false} autoComplete="off" onSubmit={handleFormSubmit}>
             <Grid container spacing={3}>
 
                 <Grid item xs={12} className={classes.inputContainer}>
@@ -55,6 +68,7 @@ export function Create(props: any) {
                         className={classes.input}
                         variant="outlined"
                         value={state.name}
+                        required 
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => (handleInputChange('name', event.target.value))}
                     />
                 </Grid>
@@ -75,6 +89,7 @@ export function Create(props: any) {
                         label="Email"
                         className={classes.input}
                         variant="outlined"
+                        required
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => (handleInputChange('email', event.target.value))}
                     />
                 </Grid>
@@ -105,12 +120,13 @@ export function Create(props: any) {
                         label="Card Number"
                         className={classes.input}
                         variant="outlined"
+                        required
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => (handleInputChange('cardNumber', event.target.value))}
                     />
                 </Grid>
 
                 <Grid item xs={12} className={classes.inputContainer}>
-                    <Button variant="contained" color="primary" type="submit">
+                    <Button variant="contained" color="primary" type="submit" disabled={!isValidated}>
                         Submit
                     </Button>
                 </Grid>

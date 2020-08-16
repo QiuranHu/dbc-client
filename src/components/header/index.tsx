@@ -8,13 +8,15 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Divider } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
       background: '#FFFFFF',
-      color: '#111111'
+      color: '#111111',
+      boxShadow: 'none'
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -46,6 +48,7 @@ function Header(props:any) {
             <Button color="inherit">Login</Button>
           </Toolbar>
         </AppBar>
+        <Divider />
       </>
     );
 }
