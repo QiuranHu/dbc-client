@@ -1,6 +1,7 @@
 .root {
     flex-grow: 1;
     margin-top: 20px;
+    overflow-x: hidden; // Prevent unexpected horizontal scroll bar. https://github.com/mui-org/material-ui/issues/7466
 }
 
 .search-container{
