@@ -7,8 +7,7 @@ import { RouteComponentProps } from 'react-router';
 import queryString from 'query-string';
 import QRCode from 'qrcode.react';
 
-interface MainProps extends RouteComponentProps {
-
+export interface MainProps extends RouteComponentProps {
 };
 
 interface MainState {
@@ -103,8 +102,8 @@ export class Main extends React.Component<MainProps, MainState> {
                                         email={this.state.email}
                                         intro={this.state.intro}
                                         resume={this.state.resume}
+                                        cardNumber={this.state.currentCardNumber}
                                     >
-
                                     </BusinessCard>
                                 )
                             }

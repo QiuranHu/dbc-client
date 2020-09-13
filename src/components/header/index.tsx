@@ -26,8 +26,12 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+interface HeaderProps {
+  changeDrawer: () => void;
+  width: "xs" | "sm" | "md" | "lg" | "xl";
+};
 
-function Header(props:any) {
+function Header(props:HeaderProps) {
     const classes = useStyles();
     return (
       <>
@@ -43,7 +47,7 @@ function Header(props:any) {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Digital Business Card
+              {props.width === 'xs' ? "DBC" : "Digital Business Card"}
             </Typography>
             <Button color="inherit">Login</Button>
           </Toolbar>

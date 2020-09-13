@@ -11,7 +11,13 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             display: 'flex',
-            width: 350,
+            [theme.breakpoints.up('xs')]: {
+                width: 300,
+              },
+            [theme.breakpoints.up('sm')]: {
+                width: 350,
+              },
+            
             justifyContent: 'space-between'
         },
         details: {
@@ -36,7 +42,12 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         crownCard: {
             display: 'flex',
-            width: 350,
+            [theme.breakpoints.up('xs')]: {
+                width: 300,
+              },
+            [theme.breakpoints.up('sm')]: {
+                width: 350,
+              },
             justifyContent: 'center',
             alignItems: 'center',
         },
@@ -47,17 +58,19 @@ const useStyles = makeStyles((theme: Theme) =>
         }
     }),
 );
-interface cardPorp {
+interface cardProps {
     name: string;
     phone?: string;
     email?: string;
     resume?: string;
     cardNumber: string;
     intro: string;
-}
-export default function BusinessCard(props: any) {
+    children?: React.ReactNode;
+};
+
+export default function BusinessCard(props: cardProps) {
     const classes = useStyles();
-    const {name, intro, phone, cardNumber, email} = props;
+    const { name, intro, phone, cardNumber, email } = props;
     return (
         <Card className={classes.root}>
             <div className={classes.details}>
@@ -81,15 +94,11 @@ export default function BusinessCard(props: any) {
                         Resume
                     </Button>
 
-                    <Typography variant="body1" color="textSecondary">
-                        {cardNumber}
-                    </Typography>
-
                 </CardContent>
 
             </div>
             <div className={classes.cover}>
-                <Avatar variant="rounded" src={caverImage} className={classes.avatar}/>
+                <Avatar variant="rounded" src={caverImage} className={classes.avatar} />
             </div>
         </Card>
     );
