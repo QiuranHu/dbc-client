@@ -5,6 +5,7 @@ import './index.scss';
 import BusinessCard from './card';
 import { RouteComponentProps } from 'react-router';
 import queryString from 'query-string';
+import QRCode from 'qrcode.react';
 
 interface MainProps extends RouteComponentProps {
 
@@ -61,27 +62,24 @@ export class Main extends React.Component<MainProps, MainState> {
             this.searchWithParameter(this.state.currentCardNumber);
         }
         this.props.history.push({
-          pathname: '/',
-          search:`?cardNumber=${this.state.currentCardNumber}`  
+            pathname: '/',
+            search: `?cardNumber=${this.state.currentCardNumber}`
         });
     }
     private checkQueryParameters = () => {
         const queryParameters = queryString.parse(this.props.location.search);
-        if(queryParameters.cardNumber) {
+        if (queryParameters.cardNumber) {
             const cardNumber = queryParameters.cardNumber;
-            if(typeof(cardNumber) === 'string') {
+            if (typeof (cardNumber) === 'string') {
                 this.searchWithParameter(cardNumber);
-                if(this.state.currentCardNumber !== cardNumber) {
-                    this.setState({currentCardNumber: cardNumber});
+                if (this.state.currentCardNumber !== cardNumber) {
+                    this.setState({ currentCardNumber: cardNumber });
                 }
             }
         }
     }
     componentDidMount() {
         this.checkQueryParameters();
-    }
-
-    componentDidUpdate() {
     }
     render() {
         return (
@@ -106,11 +104,17 @@ export class Main extends React.Component<MainProps, MainState> {
                                         intro={this.state.intro}
                                         resume={this.state.resume}
                                     >
-                                        
+
                                     </BusinessCard>
                                 )
                             }
-                            {/*  */}
+                        </Grid>
+                        <Grid item xs={12} className='qr-container'>
+                            {
+                                this.state.currentCardNumber && this.state.name && (
+                                    <QRCode value={window.location.href} size={100}></QRCode>
+                                )
+                            }
                         </Grid>
                     </Grid>
                 </div>
