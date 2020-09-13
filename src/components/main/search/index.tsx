@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -28,8 +28,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+interface SearchProps {
+  value: string;
+  onChange: (event: SyntheticEvent) => void;
+  children: React.ReactNode;
+  search: () => void;
+};
 
-export function Search(props: any) {
+export const Search = (props: SearchProps) => {
   const classes = useStyles();
 
   return (
@@ -39,8 +45,7 @@ export function Search(props: any) {
         placeholder="Card Number"
         inputProps={{ 'aria-label': 'search google maps' }}
         value={props.value}
-        onChange={(event:any) => props.onChange(event)}
-
+        onChange={(event: SyntheticEvent) => props.onChange(event)}
       />
       <IconButton 
       type="submit" 

@@ -16,6 +16,7 @@
     "@types/react-router-dom": "^5.1.5",
     "fontsource-roboto": "^3.0.3",
     "node-sass": "^4.14.1",
+    "query-string": "^6.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
@@ -43,5 +44,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:5000"
 }

@@ -3,20 +3,20 @@ import 'fontsource-roboto';
 import './index.scss';
 import Header from './header';
 import Sider from './sider';
-import { Main }  from './main';
+import { Main } from './main';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { drawerWidth } from './sider';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import { Route } from "react-router-dom";
 import { Create } from './functions/create';
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    contentShift: {
-        [theme.breakpoints.up('md')]: {
-            marginLeft: drawerWidth
+    createStyles({
+        contentShift: {
+            [theme.breakpoints.up('md')]: {
+                marginLeft: drawerWidth
+            }
         }
-    }
-  }),
+    }),
 );
 
 function App(props: any) {
@@ -26,7 +26,7 @@ function App(props: any) {
         isFirstTimeOpen: true
     });
     if (isWidthUp('md', props.width) && state.drawerOpen === false && state.isFirstTimeOpen === true) {
-        setState({drawerOpen: true, isFirstTimeOpen: false});
+        setState({ drawerOpen: true, isFirstTimeOpen: false });
     }
     const changeDrawer = () => {
         setState({ ...state, drawerOpen: !state.drawerOpen });
@@ -43,11 +43,9 @@ function App(props: any) {
                     drawerOpen={state.drawerOpen}
                     changeDrawer={changeDrawer}
                 ></Header>
-                <Route path="/" exact>
-                    <Main></Main>
+                <Route path="/" exact component={Main}>
                 </Route>
-                <Route path='/create' exact>
-                    <Create/>
+                <Route path='/create' exact component={Create}>
                 </Route>
             </div>
         </>
