@@ -1,2 +1,2 @@
-# dbs-client
+# dbc-client
 Digital business card application
