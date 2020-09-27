@@ -41,8 +41,8 @@ export const Search = (props: SearchProps) => {
     <Paper component="form" className={classes.root}>
       <InputBase
         className={classes.input}
-        placeholder="Card Number"
-        inputProps={{ 'aria-label': 'search google maps' }}
+        placeholder="Identifier"
+        inputProps={{ 'aria-label': 'Identifier' }}
         value={props.value}
         onChange={(event: SyntheticEvent) => props.onChange(event)}
       />

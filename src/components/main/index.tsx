@@ -62,17 +62,17 @@ export class Main extends React.Component<MainProps, MainState> {
         }
         this.props.history.push({
             pathname: '/',
-            search: `?cardNumber=${this.state.currentCardNumber}`
+            search: `?identifier=${this.state.currentCardNumber}`
         });
     }
     private checkQueryParameters = () => {
         const queryParameters = queryString.parse(this.props.location.search);
-        if (queryParameters.cardNumber) {
-            const cardNumber = queryParameters.cardNumber;
-            if (typeof (cardNumber) === 'string') {
-                this.searchWithParameter(cardNumber);
-                if (this.state.currentCardNumber !== cardNumber) {
-                    this.setState({ currentCardNumber: cardNumber });
+        if (queryParameters.identifier) {
+            const identifier = queryParameters.identifier;
+            if (typeof (identifier) === 'string') {
+                this.searchWithParameter(identifier);
+                if (this.state.currentCardNumber !== identifier) {
+                    this.setState({ currentCardNumber: identifier });
                 }
             }
         }

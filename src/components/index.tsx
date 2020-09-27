@@ -9,7 +9,7 @@ import { drawerWidth } from './sider';
 import withWidth, { isWidthUp, WithWidthOptions } from '@material-ui/core/withWidth';
 import { Route } from "react-router-dom";
 import { Create } from './functions/create';
-import { MainProps } from './main';
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         contentShift: {

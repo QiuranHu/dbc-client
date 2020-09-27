@@ -70,7 +70,7 @@ interface cardProps {
 
 export default function BusinessCard(props: cardProps) {
     const classes = useStyles();
-    const { name, intro, phone, cardNumber, email } = props;
+    const { name, intro, phone, email } = props;
     return (
         <Card className={classes.root}>
             <div className={classes.details}>

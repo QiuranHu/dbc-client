@@ -56,7 +56,7 @@ export function Create(props: any) {
         return re.test(email);
     }
     const validateCardNumber = (cardNumber: string): boolean => {
-        return /^\d*$/.test(cardNumber);
+        return cardNumber !== '';
     }
     if (state.name !== '' && state.email !== '' && state.cardNumber !== '') {
         isValidated = true;
@@ -194,7 +194,7 @@ export function Create(props: any) {
                         error={state.error.has('cardNumber') ? true : false}
                         autoComplete='off'
                         id="standard-basic"
-                        label="Card Number"
+                        label="Identifier"
                         className={classes.input}
                         value={state.cardNumber}
                         variant="outlined"
