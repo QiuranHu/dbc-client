@@ -6,7 +6,7 @@ import Sider from './sider';
 import { Main } from './main';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { drawerWidth } from './sider';
-import withWidth, { isWidthUp, WithWidthOptions } from '@material-ui/core/withWidth';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import { Route } from "react-router-dom";
 import { Create } from './functions/create';
 

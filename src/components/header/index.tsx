@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import 'fontsource-roboto';
 import './index.scss';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -31,30 +31,30 @@ interface HeaderProps {
   width: "xs" | "sm" | "md" | "lg" | "xl";
 };
 
-function Header(props:HeaderProps) {
-    const classes = useStyles();
-    return (
-      <>
-        <AppBar position="static" className={classes.root}>
-          <Toolbar>
-            <IconButton 
-              edge="start" 
-              className={classes.menuButton} 
-              color="inherit" 
-              aria-label="menu"
-              onClick={props.changeDrawer}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              {props.width === 'xs' ? "DBC" : "Digital Business Card"}
-            </Typography>
-            <Button color="inherit">Login</Button>
-          </Toolbar>
-        </AppBar>
-        <Divider />
-      </>
-    );
+const Header: FunctionComponent<HeaderProps> = (props) => {
+  const classes = useStyles();
+  return (
+    <>
+      <AppBar position="static" className={classes.root}>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+            onClick={props.changeDrawer}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            {props.width === 'xs' ? "DBC" : "Digital Business Card"}
+          </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
+      <Divider />
+    </>
+  );
 }
 
 export default Header;

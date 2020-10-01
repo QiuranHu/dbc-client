@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import 'fontsource-roboto';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,10 +8,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Divider from '@material-ui/core/Divider';
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
+import withWidth, { isWidthUp, WithWidth } from '@material-ui/core/withWidth';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
-import { withRouter } from "react-router";
+import { withRouter, RouteComponentProps } from "react-router";
 
 export const drawerWidth = 240;
 
@@ -32,7 +32,14 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function Sider(props: any) {
+interface SiderProps {
+  drawerOpen: boolean;
+  changeDrawer: () => void;
+};
+
+type SiderPropsWrapper = SiderProps & RouteComponentProps & WithWidth;
+
+const Sider: FunctionComponent<SiderPropsWrapper> = (props) => {
   const classes = useStyles();
   const drawerOpen = props.drawerOpen;
   const changeDrawer = props.changeDrawer;
@@ -42,13 +49,13 @@ function Sider(props: any) {
   }
   const goToCreate = () => {
     props.history.push('/create');
-    if(isSmallScreen) {
+    if (isSmallScreen) {
       changeDrawer();
     }
   };
   const goToHome = (): void => {
     props.history.push('/');
-    if(isSmallScreen) {
+    if (isSmallScreen) {
       changeDrawer();
     }
   };

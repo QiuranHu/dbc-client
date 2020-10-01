@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, FunctionComponent } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -34,7 +34,7 @@ interface SearchProps {
   search: () => void;
 };
 
-export const Search = (props: SearchProps) => {
+export const Search: FunctionComponent<SearchProps> = (props) => {
   const classes = useStyles();
 
   return (
@@ -46,14 +46,14 @@ export const Search = (props: SearchProps) => {
         value={props.value}
         onChange={(event: SyntheticEvent) => props.onChange(event)}
       />
-      <IconButton 
-      type="submit" 
-      className={classes.iconButton} 
-      aria-label="search"
-      onClick={(event: any) => {
-        event.preventDefault();
-        props.search();
-      }}
+      <IconButton
+        type="submit"
+        className={classes.iconButton}
+        aria-label="search"
+        onClick={(event: any) => {
+          event.preventDefault();
+          props.search();
+        }}
       >
         <SearchIcon />
       </IconButton>
